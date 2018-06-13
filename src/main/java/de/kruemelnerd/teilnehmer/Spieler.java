@@ -21,8 +21,8 @@ public class Spieler extends Person {
 
 
     public int schussAufTor(){
-        int muenze = WmHelper.getRandomNumber( 1, 2);
-        int halteStaerke = (this.getStaerke() * 2) + this.getGeschwindigkeit() ;
+
+        int halteStaerke = ((this.getStaerke() * 2) + this.getGeschwindigkeit()) * WmHelper.getRandomNumber( 1, 10);;
         return halteStaerke ;
     }
 

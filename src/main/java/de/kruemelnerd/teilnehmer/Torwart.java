@@ -1,5 +1,7 @@
 package de.kruemelnerd.teilnehmer;
 
+import de.kruemelnerd.WmHelper;
+
 public class Torwart extends Spieler {
 
     int reaktion;
@@ -9,7 +11,7 @@ public class Torwart extends Spieler {
     }
 
     public int halteSchussAufTor(){
-        int halteStaerke = ((this.getStaerke() * 2) + this.getGeschwindigkeit() + this.reaktion);
+        int halteStaerke = ((this.getStaerke() * 2) + this.getGeschwindigkeit() + this.reaktion) * WmHelper.getRandomNumber( 1, 10);
         return halteStaerke ;
     }
 

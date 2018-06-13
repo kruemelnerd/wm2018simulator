@@ -1,8 +1,8 @@
-import builder.PersonBuilder;
-import builder.TrainerBuilder;
+import de.kruemelnerd.builder.PersonBuilder;
+import de.kruemelnerd.builder.TrainerBuilder;
+import de.kruemelnerd.teilnehmer.Person;
+import de.kruemelnerd.teilnehmer.Trainer;
 import org.junit.Test;
-import teilnehmer.Person;
-import teilnehmer.Trainer;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

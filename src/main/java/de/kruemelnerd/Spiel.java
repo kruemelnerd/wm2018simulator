@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 public class Spiel {
 
-    private static Logger LOG = Logger.getLogger(Mannschaft.class);
+    //private static Logger LOG = Logger.getLogger(Spiel.class);
 
     private static final int SPIELDAUER = 90;
 
@@ -15,6 +15,10 @@ public class Spiel {
 
     private Mannschaft heimMannschaft;
     private Mannschaft auswaertsMannschaft;
+
+    public Spiel(){
+        vorbereitungWmSpiel();
+    }
 
 
     public void vorbereitungWmSpiel(){
@@ -38,19 +42,27 @@ public class Spiel {
             int verteidigung = teamNichtInBallBesitz.defensive();
 
             if(angriff > verteidigung){
-                LOG.info("Ein super Angriff! " + teamInBallBesitz.getName() + " kommt dem Tor ein Stück näher.");
+//                LOG.info("Ein super Angriff! " + teamInBallBesitz.getName() + " kommt dem Tor ein Stück näher.");
                 ballInZone++;
 
                 if(ballInZone > 3){
-                    teamInBallBesitz.
+                    int schussStaerke = teamInBallBesitz.schussAufTor();
+                    int halteStaerke = teamNichtInBallBesitz.halteSchussAufTor();
+
+                    if(schussStaerke > halteStaerke){
+//                        LOG.info("TOOOOOOOOOOOOOOOOOOOOOOOOR für " + teamInBallBesitz.getName());
+                        ballInZone = 0;
+                        ballAbnahme(teamInBallBesitz, teamNichtInBallBesitz);
+                    }
                 }
             }
         }
+    }
 
-
-
-
-
+    public void ballAbnahme(Mannschaft ball, Mannschaft nichtBall){
+        Mannschaft tmp = ball;
+        ball = nichtBall;
+        nichtBall = tmp;
     }
 
     public Mannschaft werfeMuenzeFürStart(Mannschaft team1, Mannschaft team2) throws NoSuchElementException{

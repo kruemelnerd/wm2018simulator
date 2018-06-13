@@ -1,5 +1,5 @@
+import de.kruemelnerd.teilnehmer.Spieler;
 import org.junit.Test;
-import teilnehmer.Spieler;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

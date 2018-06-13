@@ -1,4 +1,4 @@
-package de.kruemelnerd.builder.;
+package de.kruemelnerd.builder;
 
 
 import de.kruemelnerd.teilnehmer.Person;

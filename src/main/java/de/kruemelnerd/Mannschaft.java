@@ -1,54 +1,59 @@
 package de.kruemelnerd;
 
-import org.apache.log4j.spi.LoggerFactory;
-import teilnehmer.Spieler;
-import teilnehmer.Torwart;
-import teilnehmer.Trainer;
+import de.kruemelnerd.teilnehmer.Spieler;
+import de.kruemelnerd.teilnehmer.Torwart;
+import de.kruemelnerd.teilnehmer.Trainer;
 
-import org.apache.log4j.Logger;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class Mannschaft {
 
-    private static Logger LOG = Logger.getLogger(Mannschaft.class);
+    //private static Logger LOG = Logger.getLogger(Mannschaft.class);
 
-    public String name;
-    public Trainer trainer = new Trainer();
-    public Spieler[] alleSpieler = new Spieler[9];
-    public Torwart torwart = new Torwart();
+    private String name;
+    private Trainer trainer = new Trainer();
+    private Spieler[] alleSpieler = new Spieler[9];
+    private Torwart torwart = new Torwart();
 
 
-    public int angriff(){
+    public int angriff() {
         int angriffStaerke = 0;
-        for ( Spieler spieler : alleSpieler){
+        for (Spieler spieler : alleSpieler) {
             angriffStaerke += spieler.getStaerke() * 2;
-            angriffStaerke += spieler.getGeschwindigkeit() ;
+            angriffStaerke += spieler.getGeschwindigkeit();
         }
         angriffStaerke *= trainer.getErfahrung();
+        angriffStaerke *= WmHelper.getRandomNumber(0, 5);
         return angriffStaerke;
     }
 
-    public int defensive(){
+    public int defensive() {
         int defensivStaerke = 0;
-        for ( Spieler spieler : alleSpieler){
+        for (Spieler spieler : alleSpieler) {
             defensivStaerke += spieler.getAbwehr() * 2;
             defensivStaerke += spieler.getGeschwindigkeit();
         }
         defensivStaerke *= trainer.getErfahrung();
+        defensivStaerke *= WmHelper.getRandomNumber(0, 5);
         return defensivStaerke;
     }
 
 
-    public void anstoss(){
+    public void anstoss() {
         Spieler spieler = alleSpieler[WmHelper.getRandomNumber(0, alleSpieler.length)];
-        LOG.info("Der Anstoss wird von " + spieler.getName() + " ausgeführt. Wir sind alle gespannt!");
+        //LOG.info("Der Anstoss wird von " + spieler.getName() + " ausgeführt. Wir sind alle gespannt!");
     }
 
-    public int schussAufTor(){
+    public int schussAufTor() {
         Spieler spieler = alleSpieler[WmHelper.getRandomNumber(0, alleSpieler.length)];
-        int schussStaerke = ((spieler.getStaerke() * 2) + spieler.getGeschwindigkeit()) * trainer.getErfahrung();
-        return schussStaerke;
+        return spieler.schussAufTor();
     }
 
+
+    public int halteSchussAufTor() {
+        return torwart.halteSchussAufTor();
+    }
 
 
     // -------------------
@@ -85,5 +90,24 @@ public class Mannschaft {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Mannschaft)) return false;
+        Mannschaft that = (Mannschaft) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(trainer, that.trainer) &&
+                Arrays.equals(alleSpieler, that.alleSpieler) &&
+                Objects.equals(torwart, that.torwart);
+    }
+
+    @Override
+    public int hashCode() {
+
+        int result = Objects.hash(name, trainer, torwart);
+        result = 31 * result + Arrays.hashCode(alleSpieler);
+        return result;
     }
 }
