@@ -1,4 +1,5 @@
 import org.junit.Test;
+import teilnehmer.Spieler;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -19,12 +20,12 @@ public class PersonTest {
 
         Spieler spieler = new Spieler(alterWert, vorname, nachname, staerkeWert, abwehrWert, geschwindigkeitWert);
 
-        // Werte direkt in Spieler
+        // Werte direkt in teilnehmer.Spieler
         assertThat(spieler.getAbwehr(), is(abwehrWert));
         assertThat(spieler.getGeschwindigkeit(), is(geschwindigkeitWert));
         assertThat(spieler.getStaerke(), is(staerkeWert));
 
-        // Werte aus Person in Spieler vererbt
+        // Werte aus teilnehmer.Person in teilnehmer.Spieler vererbt
         assertThat(spieler.getAlter(), is(alterWert));
         assertThat(spieler.getName(), is(nachname));
         assertThat(spieler.getVorname(), is(vorname));
