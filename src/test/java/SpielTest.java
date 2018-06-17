@@ -31,7 +31,7 @@ public class SpielTest {
         assertThat(mannschaft2.getName(), is("Mexiko"));
 
         Spiel spiel = new Spiel();
-        spiel.ballAbnahme(mannschaft1, mannschaft2);
+        spiel.ballAbnahme();
 
         assertThat(mannschaft1.getName(), is("Mexiko"));
         assertThat(mannschaft2.getName(), is("Deutschland"));

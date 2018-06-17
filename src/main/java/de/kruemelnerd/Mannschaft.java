@@ -3,18 +3,22 @@ package de.kruemelnerd;
 import de.kruemelnerd.teilnehmer.Spieler;
 import de.kruemelnerd.teilnehmer.Torwart;
 import de.kruemelnerd.teilnehmer.Trainer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Mannschaft {
 
-    //private static Logger LOG = Logger.getLogger(Mannschaft.class);
+    private static final Logger LOGGER = LogManager.getLogger(Spiel.class.getName());
 
     private String name;
     private Trainer trainer = new Trainer();
     private Spieler[] alleSpieler = new Spieler[9];
     private Torwart torwart = new Torwart();
+
+    private int tore = 0;
 
 
     public int angriff() {
@@ -40,9 +44,9 @@ public class Mannschaft {
     }
 
 
-    public void anstoss() {
+    public Spieler anstoss() {
         Spieler spieler = alleSpieler[WmHelper.getRandomNumber(0, alleSpieler.length)];
-        //LOG.info("Der Anstoss wird von " + spieler.getName() + " ausgeführt. Wir sind alle gespannt!");
+        return spieler;
     }
 
     public int schussAufTor() {
@@ -55,6 +59,9 @@ public class Mannschaft {
         return torwart.halteSchussAufTor();
     }
 
+    public void torGeschossen() {
+        tore++;
+    }
 
     // -------------------
     // Getter & Setter
@@ -90,6 +97,11 @@ public class Mannschaft {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public int getTore() {
+        return tore;
     }
 
     @Override
